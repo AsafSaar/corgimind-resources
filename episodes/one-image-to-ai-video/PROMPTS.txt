@@ -1,0 +1,21 @@
+EXACT EXPERIMENT PROMPTS
+
+These are the same strings in both GUI workflow files.
+The original source illustration is not included. The positive prompt
+describes that specific miniature workshop and is not a generic prompt
+for every image. Adapt it to your own authorized source before running.
+
+POSITIVE PROMPT
+A locked-off wide shot of the exact warm miniature workshop in the reference image. Preserve the same three characters, faces, clothes, proportions and composition. The small white friendly robot on the right gently lowers the existing wooden drawbridge with the hand already touching its handle. The bridge rotates slowly at its existing hinge, comes to rest across the narrow gap, and stays in place. One simple careful action. The seated grey-haired man with rectangular glasses keeps his head resting on his hand and gives a small pleased smile. The compact natural corgi on the left makes one slight curious head tilt, keeping its paws in place. Preserve the miniature courier, stones and river. Warm amber practical lights and navy workshop walls remain unchanged. Fixed camera throughout, no pan, no zoom, no cut, no reframing. Smooth restrained motion.
+
+NEGATIVE PROMPT
+camera movement, pan, zoom, dolly, reframing, cut, scene change, changing face, different identity, changing glasses, exaggerated expression, talking human, standing up, giant dog, changing body proportions, deformed hands, extra fingers, extra limbs, floating objects, melting bridge, changing robot design, duplicated character, fast movement, text, subtitles, logo, watermark, blur, overexposure, flicker, low quality
+
+ADAPTATION CHECKLIST
+- Describe the actual people/objects in your own starting picture.
+- Ask for one small action; keep camera instructions explicit.
+- Describe what should remain stable, but inspect whether it really does.
+- Save your edited prompt with the result.
+- For a 12-versus-20-step comparison, use exactly the same source image and
+  prompts in both tests. Change only sampling steps and output prefix.
+- Prompts do not guarantee identity, anatomy, physical contact or realism.

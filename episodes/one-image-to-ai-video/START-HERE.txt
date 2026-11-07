@@ -1,0 +1,103 @@
+CORGIMIND: ONE IMAGE TO AI VIDEO
+Viewer workflow package v1 | November 7, 2026
+
+IMPORTANT STATUS
+These two ComfyUI GUI workflow files have passed static JSON, graph-link and
+parameter checks against the retained API experiment. They have NOT been
+imported or executed in the GUI. Treat them as prepared starting points, not
+verified one-click presets. No new video generation was run for this package.
+
+The video demonstrates a recorded Wan 2.2 TI2V-5B experiment. This download
+contains the graph settings and exact experiment prompts, not the original
+source illustration, model weights or finished footage. You must supply an
+image you own or have permission to use. With a different image, you will not
+reproduce the exact footage shown in the episode.
+
+CONTENTS
+- workflows/corgimind-12-step-gui.json
+- workflows/corgimind-20-step-gui.json
+- PROMPTS.txt: exact positive and negative experiment prompts, plus adaptation tips
+- MODELS-AND-DEPENDENCIES.txt: model filenames, folders and official references
+- EXPORT-FRAMES.txt: separate PNG-to-MP4 instructions
+- SHA256SUMS.txt: checksums of the six content files
+
+BEFORE YOU START
+You need a working ComfyUI installation with Wan 2.2 TI2V-5B node support,
+the three weights in MODELS-AND-DEPENDENCIES.txt, compatible drivers/runtime,
+sufficient RAM/VRAM/disk space, and your own starting image. FFmpeg is optional
+and needed only for the separate MP4 export. Installation is not covered here.
+
+The recorded test used an RTX 5080 with 16GB VRAM. That is the test machine,
+not a guaranteed minimum requirement or a promise that all 16GB cards work.
+No CPU video-generation test is claimed. These presets can use substantial
+memory. A smaller test may help on limited hardware, but changes the comparison.
+
+LOAD AND CHECK
+1. Extract the ZIP. Open your own installed ComfyUI interface.
+2. Use its workflow Open/Load action, or drag in
+   workflows/corgimind-12-step-gui.json. Menu labels vary by frontend version.
+3. If nodes are missing, stop and check MODELS-AND-DEPENDENCIES.txt.
+   Do not assume a similarly named third-party node is equivalent.
+4. Confirm UNETLoader, CLIPLoader and VAELoader resolve the exact filenames.
+   CLIPLoader type is wan; its device and the model weight dtype are default.
+5. In LoadImage, replace YOUR-OWN-IMAGE.png using the image chooser/upload
+   control. That filename is a placeholder, not an included file. Confirm
+   LoadImage is active (not muted or bypassed) and connected to start_image.
+6. Adapt the positive prompt to describe your image and one small action.
+   The supplied prompt assumes a miniature workshop, robot, bridge, man and
+   corgi. It is intentionally retained verbatim and will not fit every image.
+7. Verify the settings below. Use a fresh SaveImage prefix for every test.
+8. When the graph validates on your setup, queue one run. This is the first
+   execution of this viewer graph on your machine, not a step certified here.
+9. Inspect the complete PNG sequence for identity, hands, contact, hinges,
+   background changes and flicker. Keep the first result before changing
+   settings. Use EXPORT-FRAMES.txt if you want a playable MP4.
+
+CONTROLLED SETTINGS
+Both files use:
+  Width 1024; height 576; length 121 frames; batch size 1
+  Seed 11022026; seed behavior fixed
+  CFG 5; sampler uni_pc; scheduler simple; denoise 1
+  ModelSamplingSD3 shift 8
+  The same model filenames, positive prompt and negative prompt
+
+The 12-step file uses 12 KSampler steps.
+The 20-step file uses 20 KSampler steps.
+Default SaveImage prefixes are different so their outputs stay separated:
+  corgimind-viewer-12-step/frame
+  corgimind-viewer-20-step/frame
+
+To compare them, select the SAME source image in both workflows, apply any
+prompt edits identically, and keep all other settings unchanged. Loading the
+second file restores its original scene-specific prompts. Do not accidentally
+compare two different prompts. Saving a 12-step copy and changing only steps
+and output prefix is another way to keep the test controlled.
+A fixed seed does not guarantee identical output across machines, versions
+or runtime configurations. More steps are not a universal quality guarantee.
+
+FRAMES AND VIDEO
+SaveImage saves PNG frames, not an MP4. There is no audio-generation node.
+24 fps is a separate export choice, not a KSampler setting.
+121 frames / 24 fps = 5.0417 seconds. Native resolution is 1024 x 576;
+placing it on a 1080p timeline does not add detail.
+
+WHAT WAS CHECKED FOR THIS DOWNLOAD
+- Both files parse as JSON and use GUI workflow format, not raw API logs.
+- Each has 11 active computational nodes and 12 valid, consistent links.
+- All computational nodes feed the output; no disconnected branch or cycle.
+- Model names, prompts, seed and sampling settings match the retained graph.
+- Deliberate computational changes are only the input-image placeholder and
+  new output prefixes. Notes, display metadata and workflow IDs are sanitized.
+- The ZIP contains only the listed text/JSON files and checksums.
+- GUI import, node resolution and a completed GUI run remain UNVERIFIED.
+
+If an import or run fails, record the ComfyUI version and exact error, and
+check the official documentation. Do not interpret a static check as runtime
+compatibility. The note panel is explanatory only; if MarkdownNote alone is
+unsupported by your frontend, it may be removed without changing computation.
+Do not remove a missing computational node and assume the workflow is intact.
+
+Source art, private production records, raw API logs, credentials, payment
+records, video/audio and model weights are not included. No source-art or
+model rights are granted by this package; use your own authorized inputs and
+follow the software and model licenses linked in the dependency instructions.

@@ -1,0 +1,40 @@
+EXPORT PNG FRAMES TO MP4
+
+The GUI graphs end at SaveImage. They do not encode video or generate audio.
+You need a completed frame sequence before using these steps. The example
+export was checked previously with retained experiment frames; the new GUI
+workflow has not been run, so no new viewer output is being certified.
+
+1. Find the output folder for ONE completed run, normally underneath your
+   ComfyUI output directory at the SaveImage prefix shown in the workflow.
+   Confirm you have all 121 PNG frames from that run, in order. Do not mix
+   frames from multiple runs. Retain the original PNGs.
+2. Inspect the real filenames and counter. The example below assumes exactly
+   frame_00001_.png through frame_00121_.png. If your counter begins elsewhere
+   or filenames differ, adjust -start_number and the input pattern.
+   Missing or mismatched names must be resolved before encoding.
+3. Open a terminal in that sequence's folder. With FFmpeg available, run:
+
+ffmpeg -n -framerate 24 -start_number 1 -i "frame_%05d_.png" -frames:v 121 -an -c:v libx264 -preset fast -crf 18 -pix_fmt yuv420p -movflags +faststart "new-result.mp4"
+
+This is an interactive terminal example (including PowerShell), not a Windows
+batch file. In a .bat/.cmd file the percent sign needs batch-file escaping.
+-n refuses to overwrite an existing output. Use a new output name each time.
+-framerate 24 interprets the image sequence at 24 frames per second.
+-frames:v 121 limits output length; it is not proof that 121 frames existed.
+-an creates a silent file. No audio is present in the PNG sequence.
+
+4. Check the result. If FFprobe is installed:
+
+ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=width,height,avg_frame_rate,nb_read_frames -show_entries format=duration -of default=noprint_wrappers=1 "new-result.mp4"
+
+Expected for these settings: 1024 x 576; avg_frame_rate 24/1;
+nb_read_frames 121; duration about 5.0417 seconds.
+
+5. A full decode checks for decoding errors (no output file is written):
+
+ffmpeg -v error -i "new-result.mp4" -f null -
+
+Also watch the whole video. A successful encode/decode does not prove that
+faces, hands, motion or physical interactions are correct.
+No generated result is included in this package.

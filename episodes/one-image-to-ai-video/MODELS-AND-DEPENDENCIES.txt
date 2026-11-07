@@ -1,0 +1,57 @@
+MODELS AND DEPENDENCIES
+
+Use a working ComfyUI installation that supports Wan 2.2 TI2V-5B. These files
+do not install ComfyUI, drivers, PyTorch or models. No exact minimum ComfyUI
+version is certified for this download; GUI compatibility remains unverified.
+
+Official overview and placement instructions:
+https://docs.comfy.org/tutorials/video/wan/wan2_2
+
+Model files selected by both workflows:
+1. wan2.2_ti2v_5B_fp16.safetensors
+   Standard folder: ComfyUI/models/diffusion_models/
+   Loader: UNETLoader, weight dtype default
+   Download:
+   https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/diffusion_models/wan2.2_ti2v_5B_fp16.safetensors
+
+2. umt5_xxl_fp8_e4m3fn_scaled.safetensors
+   Standard folder: ComfyUI/models/text_encoders/
+   Loader: CLIPLoader, type wan, device default
+   Download:
+   https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors
+
+3. wan2.2_vae.safetensors
+   Standard folder: ComfyUI/models/vae/
+   Loader: VAELoader
+   Download:
+   https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan2.2_vae.safetensors
+
+Use the model repository pages to review model cards and licensing:
+https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged
+https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged
+
+These are the filenames and source URLs embedded in the prepared graph,
+not newly downloaded or tested weights. Links and upstream files can change.
+Review the official documentation if a file is unavailable. Refresh/restart
+your installation as appropriate after adding weights, then select them in
+the loaders. If you use configured alternative model directories, follow your
+installation's documented model-path setup.
+
+The graph uses these computational node classes:
+UNETLoader, CLIPLoader, VAELoader, LoadImage, CLIPTextEncode (twice),
+Wan22ImageToVideoLatent, ModelSamplingSD3, KSampler, VAEDecode, SaveImage.
+MarkdownNote is an explanatory frontend note, not a computation.
+No third-party custom-node pack or Video Helper Suite node is required by
+the serialized graph. A frontend/runtime with the listed node classes is
+still necessary. Missing-node and version behavior has not been GUI-tested.
+
+Allow disk space for all weights, the runtime, your images and output frames.
+Disk storage for weights is not the same as peak VRAM required during a run.
+The episode's RTX 5080 has 16GB VRAM; results do not establish a universal
+hardware minimum.
+
+Optional export:
+Use an FFmpeg build that includes the libx264 encoder to make the example MP4.
+No FFmpeg binary or installer is bundled. Follow official downloads:
+https://ffmpeg.org/download.html
+FFprobe, typically distributed with FFmpeg, can inspect the result.
